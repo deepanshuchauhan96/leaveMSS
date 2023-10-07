@@ -1,0 +1,67 @@
+<template>
+    <div class="slds-box slds-theme_default">
+      
+       
+            <lightning-layout multiple-rows>
+    <lightning-layout-item size="12" class="button-container">
+        <div class="slds-align_absolute-center">
+      <lightning-icon  icon-name="action:new" alternative-text="Add new Leave Request" onclick={handleAdd} ></lightning-icon>
+        </div>
+    </lightning-layout-item>
+    <lightning-layout-item size="12" class="text-container">
+     <b> <p class="slds-align_absolute-center" style="color:#45c65a;margin-top:7px;">Create new Leave Request</p></b>
+    </lightning-layout-item>
+  </lightning-layout>
+  
+       <div class="slds-box slds-theme_default">
+   <div class="slds-align_absolute-center">
+     <div>
+      
+       <b><h1 style="margin-left:130px;color:brown;">Planned Leave</h1></b>
+        <canvas lwc:ref="myDiv" class="stacked1" lwc:dom="manual"></canvas>
+        
+     </div>
+
+    <div>
+      <b><h1 style="margin-left:130px;color:brown;">Sick Leave</h1></b>
+        <canvas lwc:ref="myDiv2" class="stacked2" lwc:dom="manual"></canvas>
+       
+    </div>
+
+    <div>
+      <b><h1 style="margin-left:130px;color:brown;">Unpaid Leave</h1></b>
+        <canvas lwc:ref="myDiv3" class="stacked3" lwc:dom="manual"></canvas>
+       </div>
+   </div>
+   </div>
+       
+        
+        
+</div>
+<div class="slds-box slds-theme_default">
+<lightning-tabset>
+    <lightning-tab label="Leave Information"> 
+        <template if:true={ldata}>
+    
+<c-leave-datatable type='user' onupdateleave= {handleUpdate} ldata={ldata}></c-leave-datatable>
+    
+</template>
+    </lightning-tab>
+    
+    <lightning-tab label="Manger Approval"> 
+       <template if:true={mdata}>
+        <c-leave-datatable type='manager' onupdateleave= {handleUpdate} ldata={mdata}></c-leave-datatable>
+    </template>
+    <template if:false={mdata}>
+      <b><h1 class="slds-align_absolute-center" style="color:green;font-size: 17px;">No pending leave to approve of your Subordinates!</h1></b>
+    </template>
+    </lightning-tab>
+    
+</lightning-tabset>
+
+</div>
+<iframe id="LWCWithVFPage" src="/apex/ganttCHART" width="100%" height="350px"> </iframe>
+<iframe id="LWCWithVFPage1" src="/apex/amchart" width="100%" height="700px"> </iframe>
+
+
+</template>
